@@ -1,8 +1,7 @@
-# Follow Your Rep
+#  Follow Your Rep
 *Short description of your project, in one or two sentences.* 
 
 ## Technologies in Used:
-
 * **Front-End:**
   * **In Use:** HTML, CSS, JS, and Bootstrap 5 (Alpha).
   * **Not in used:** JQuery (because it's 2020).
@@ -10,11 +9,13 @@
 * **Back-End:**
   * **In Use:** Python, Flask, PostgreSQL, and Bcrypt.
   
-
-## Database Information:
+##  Database Information:
 ### Many-To-Many Schema
  ![](https://i.imgur.com/I89P5Rn.jpg)
 
+### APIs:
+* **External:**
+  * [ProPublica's Congress API](https://www.propublica.org/datastore/api/propublica-congress-api)
 
 ## Demo
 
@@ -23,7 +24,6 @@ Section to come
 
 ## Testing
 All Functions where broken down and unit tested wherever possible. More information to come.
-
 * **Front-End:** JasmineJS
 * **Back-End:** Python unittest 
 
