@@ -150,23 +150,27 @@ class Bill(db.Model):
         db.Text,
     )
 
-    bill_slug = db.Column(
+    title = db.Column(
         db.Text,
     )
 
-    bill_type = db.Column(
+    short_title = db.Column(
         db.Text,
     )
 
-    congressdotgov_url = db.Column(
+    govtrack_url = db.Column(
         db.Text,
     )
 
-    committee = db.Column(
+    committees = db.Column(
         db.Text,
     )
 
-    last_major_action = db.Column(
+    latest_major_action = db.Column(
+        db.Text,
+    )
+
+    primary_subject = db.Column(
         db.Text,
     )
 
