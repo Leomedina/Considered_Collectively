@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Register or Login{% endblock %} 
+{% block content %}
+
+<div class="container-fluid p-5">
+    <div class="row">
+        <H1 class="display-3"><strong>Thank you for your interest!</strong></H1>
+    </div>
+    <div class="row justify-content-center p-5">
+        <div class="col-md-4">
+            <div class="lead py-4"> <strong>New?</strong> Register using the form below.</div>
+            {% include 'forms/register.html' %}
+        </div>
+        <div class="col-md-4">
+            <div class="lead py-4"><strong>Already a member?</strong> Login below!</div>
+            {% include 'forms/register.html' %}
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -63,10 +63,10 @@ class User(db.Model):
         return f"{first_half} {second_half}"
     
     @classmethod
-    def register(cls, email, pwd, name):
+    def register(cls, email, password, name):
         """WRITE THIS"""
 
-        hashed = bcrypt.generate_password_hash(pwd)
+        hashed = bcrypt.generate_password_hash(password)
         hashed_utf8 = hashed.decode("utf8")
 
         return cls(
@@ -76,11 +76,11 @@ class User(db.Model):
         )
 
     @classmethod
-    def authenticate(cls, email, pwd):
+    def authenticate(cls, email, password):
         """WRITE THIS"""
 
         user = User.query.filter_by(email = email).first()
-        if user and bcrypt.check_password_hash(u.password, pwd):
+        if user and bcrypt.check_password_hash(u.password, password):
             return user
         else:
             return False

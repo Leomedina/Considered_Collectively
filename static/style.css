@@ -1,5 +1,6 @@
 * {
     font-family: 'Montserrat', sans-serif;
+    color: #183763;
 }
 
 body {
@@ -8,4 +9,20 @@ body {
 
 a {
     color: #183763;
+}
+
+strong {
+    font-weight: 800;
+}
+
+.btn-primary {
+    border: none;
+    background-color: #ffa333;
+}
+.btn-primary:hover {
+    background-color: #ffc680;
+}
+
+a:hover {
+    color: #ffc680;
 }
