@@ -9,6 +9,9 @@
   </head>
   <body class="d-flex">
     <div class="cover-container d-flex w-100 h-100 p-0 flex-column text-center">
+        {% for category, message in get_flashed_messages(with_categories=True) %}
+  <div class="alert alert-{{ category }}">{{ message }}</div>
+  {% endfor %}
       {% include 'base/navbar.html' %}
       {% block content %} {% endblock %} 
       {% include 'base/footer.html' %}

@@ -26,27 +26,19 @@
       <li class="nav-item px-1">
         <a href="/login" class="nav-link">Log-In</a>
       </li>
-      <!-- <li class="nav-item px-1">
-        <a href="/login" class="nav-link">Log-In</a>
-      </li> -->
       {% else %}
       <li class="nav-item px-1">
-        <a href="/" class="nav-link">Home</a>
+        <a href="/user" class="nav-link">
+          {{ g.user.name }}
+        </a>
       </li>
-      <li class="nav-item px-1">
-        <a href="/user" class="nav-link">Profile</a>
-      </li>
+        <li class="nav-item px-1">
+          <a href="/" class="nav-link">Home</a>
+        </li>
       <li class="nav-item px-1">
         <a href="/logout" class="nav-link">Log-out</a>
       </li>
       {% endif %}
-      <!-- <li>
-          <a aria-current="page" href="/">Home</a>
-      </li>
-        <li class="nav-item px-1">
-          <a class="nav-link" href="/user">Login / Register</a>
-        </li>
-      </ul> -->
     </div>
   </div>
 </nav>

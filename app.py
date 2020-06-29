@@ -4,6 +4,7 @@ from sqlalchemy.exc import IntegrityError
 
 from models import *
 from forms import *
+from utilities import *
 
 CURR_USER_KEY = "curr_user"
 
@@ -72,18 +73,20 @@ def register():
 @app.route("/login", methods = ["GET","POST"])
 def login():
     """handle user login"""
+    if g.user:
+        return redirect('/')
+
     form = LoginForm()
 
     if form.validate_on_submit():
         user = User.authenticate(form.email.data,
                                  form.password.data)
-
         if user:
             do_login(user)
-            flash(f"Welcome, {user.name}!", "success")
-            return redirect("/")
-
-        flash("Invalid credentials.", 'danger')
+            flash(f"Welcome back! {user.name}!", "success")
+        else:
+            flash("Invalid credentials.", 'danger')
+        return redirect("/login")
 
     return render_template("/user/login.html", form = form)
 
@@ -95,7 +98,7 @@ def logout():
     return redirect("/")
 
 ####################################################################################
-#Home Routes
+#Routes
 
 @app.route("/", methods=["GET", "POST"])
 def show_home():
@@ -106,3 +109,25 @@ def show_home():
 
     return render_template("home-anon.html")
 
+
+@app.route("/user", methods=["GET", "POST"])
+def user():
+    if not g.user:
+        flash("Must be logged in to view page", "danger")
+        return redirect("/")
+    
+    form = EditProfileForm(obj = g.user)
+
+    if form.validate_on_submit():
+        if not User.authenticate(g.user.email, form.password.data):
+            flash("Wrong Password", "danger")
+            return redirect("/")
+        user = User.query.get_or_404(g.user.id)
+        user.email = form.email.data
+        user.name = form.name.data
+        # user.profile_url = form.profile_url.data
+        db.session.add(user)
+        db.session.commit()
+        flash("Profile Updated!", "success")
+        return redirect('/')
+    return render_template("/user/edit_user.html", form = form )
