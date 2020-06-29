@@ -1,4 +1,4 @@
-#  Follow Your Rep
+#  Considered Collectively
 *Short description of your project, in one or two sentences.* 
 
 ## Technologies in Used:
