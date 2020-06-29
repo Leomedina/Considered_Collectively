@@ -21,7 +21,7 @@ app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 connect_db(app);
 
 ####################################################################################
-# User Sign-Up/Login/Logout
+# User Register/Login/Logout
 
 @app.before_request
 def add_user_to_g():
@@ -42,20 +42,8 @@ def do_logout():
     if CURR_USER_KEY in session:
         del session[CURR_USER_KEY]
 
-##DO SIGNUP, make form add to route 
-
-
-@app.route("/", methods=["GET", "POST"])
-def show_home():
-    """Return home if user is logged in.
-        If user is not logged in, redirect to anonymous home"""
-    if g.user:
-        return render_template('home.html')
-
-    return render_template("home-anon.html")
-
-@app.route("/user", methods=["GET", "POST"])
-def handle_user():
+@app.route("/register", methods=["GET", "POST"])
+def register():
 
     if g.user:
         return render_template('home.html')
@@ -69,11 +57,52 @@ def handle_user():
                 password = form.password.data,
                 name = form.name.data,
             )
+
             db.session.add(user)
             db.session.commit()
             do_login(user)
+            return redirect("/")
+            
         except IntegrityError:
             flash("Email already taken", "danger")
-            return redirect('/user')
+            return redirect("/")
     
-    return render_template("user/user-anon.html", form = form)
+    return render_template("user/register.html", form = form)
+
+@app.route("/login", methods = ["GET","POST"])
+def login():
+    """handle user login"""
+    form = LoginForm()
+
+    if form.validate_on_submit():
+        user = User.authenticate(form.email.data,
+                                 form.password.data)
+
+        if user:
+            do_login(user)
+            flash(f"Welcome, {user.name}!", "success")
+            return redirect("/")
+
+        flash("Invalid credentials.", 'danger')
+
+    return render_template("/user/login.html", form = form)
+
+@app.route("/logout")
+def logout():
+    """Handle Logout functionality"""
+    do_logout()
+    flash(f"You've logged out", "success")
+    return redirect("/")
+
+####################################################################################
+#Home Routes
+
+@app.route("/", methods=["GET", "POST"])
+def show_home():
+    """Return home if user is logged in.
+        If user is not logged in, redirect to anonymous home"""
+    if g.user:
+        return render_template('home.html')
+
+    return render_template("home-anon.html")
+

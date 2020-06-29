@@ -1,6 +1,6 @@
 {% extends 'base/base.html' %}
 
-{% block title %}Register or Login{% endblock %} 
+{% block title %}Register{% endblock %} 
 {% block content %}
 
 <div class="container-fluid p-5">
@@ -12,12 +12,7 @@
             <div class="lead py-4"> <strong>New?</strong> Register using the form below.</div>
             {% include 'forms/register.html' %}
         </div>
-        <div class="col-md-4">
-            <div class="lead py-4"><strong>Already a member?</strong> Login below!</div>
-            {% include 'forms/register.html' %}
-        </div>
     </div>
-
 </div>
 
 {% endblock %}

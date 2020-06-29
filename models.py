@@ -80,7 +80,7 @@ class User(db.Model):
         """WRITE THIS"""
 
         user = User.query.filter_by(email = email).first()
-        if user and bcrypt.check_password_hash(u.password, password):
+        if user and bcrypt.check_password_hash(user.password, password):
             return user
         else:
             return False
