@@ -83,7 +83,6 @@ def login():
                                  form.password.data)
         if user:
             do_login(user)
-            flash(f"Welcome back! {user.name}!", "success")
         else:
             flash("Invalid credentials.", 'danger')
         return redirect("/login")
@@ -94,7 +93,6 @@ def login():
 def logout():
     """Handle Logout functionality"""
     do_logout()
-    flash(f"You've logged out", "success")
     return redirect("/")
 
 ####################################################################################
