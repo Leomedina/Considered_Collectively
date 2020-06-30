@@ -1,27 +1,27 @@
 * {
-    font-family: 'Montserrat', sans-serif;
-    color: #183763;
+  font-family: "Montserrat", sans-serif;
+  color: #183763;
 }
 
 body {
-    background-color: #FBFBFB;
+  background-color: #fbfbfb;
 }
 a {
-    color: #183763;
+  color: #183763;
 }
 
 strong {
-    font-weight: 800;
+  font-weight: 800;
 }
 
 .btn-primary {
-    border: none;
-    background-color: #ffa333;
+  border: none;
+  background-color: #ffa333;
 }
 .btn-primary:hover {
-    background-color: #ffc680;
+  background-color: #ffc680;
 }
 
 a:hover {
-    color: #ffc680;
+  color: #ffc680;
 }

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect, session, g
+from flask import Flask, render_template, request, flash, redirect, session, g, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 
@@ -96,13 +96,13 @@ def logout():
     return redirect("/")
 
 ####################################################################################
-#Routes
 
 @app.route("/", methods=["GET", "POST"])
 def show_home():
     """Return home if user is logged in.
         If user is not logged in, redirect to anonymous home"""
     if g.user:
+        # reps = g.user.
         return render_template('home.html')
 
     return render_template("home-anon.html")
@@ -129,3 +129,6 @@ def user():
         flash("Profile Updated!", "success")
         return redirect('/')
     return render_template("/user/edit_user.html", form = form )
+
+####################################################################################
+
