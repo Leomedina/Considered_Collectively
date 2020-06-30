@@ -1,8 +1,6 @@
 <div class="col-md-5 shadow-sm pt-2 rounded">
-  <h2 class="h2">
-    <u>
+  <h3 class="h3">
       Latest Bills:
-    </u>
     <div class="list-group list-group-flush pt-2">
       {% for bill in bills %}
         <a href="{{bill.congressdotgov_url}}/text" 
@@ -12,5 +10,5 @@
         </a>
       {% endfor %}
     </div>
-  </h2>
+  </h3>
 </div>
