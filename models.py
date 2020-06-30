@@ -166,11 +166,15 @@ class Bill(db.Model):
         db.Text,
     )
 
+    primary_subject = db.Column(
+        db.Text,
+    )
+
     latest_major_action = db.Column(
         db.Text,
     )
 
-    primary_subject = db.Column(
+    latest_major_action_date = db.Column(
         db.Text,
     )
 

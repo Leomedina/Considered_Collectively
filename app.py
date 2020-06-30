@@ -97,15 +97,21 @@ def logout():
 
 ####################################################################################
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 def show_home():
     """Return home if user is logged in.
         If user is not logged in, redirect to anonymous home"""
     if g.user:
-        # reps = g.user.
         return render_template('home.html')
 
-    return render_template("home-anon.html")
+    bill_data = [(APIUtils.get_recent_bills().get(0)),
+                    (APIUtils.get_recent_bills().get(1)),
+                    (APIUtils.get_recent_bills().get(2)),
+                    (APIUtils.get_recent_bills().get(3)),
+                    (APIUtils.get_recent_bills().get(4)),
+    ]
+
+    return render_template("home-anon.html", bills = bill_data)
 
 
 @app.route("/user", methods=["GET", "POST"])
@@ -132,3 +138,15 @@ def user():
 
 ####################################################################################
 
+@app.route("/bills")
+def recent_bills():
+    bill_data = APIUtils.get_recent_bills();
+
+    return jsonify(bill_data)
+
+@app.route("/bills_search")
+def search_bills():
+    query = "health care"
+    bill_search = APIUtils.search_bills(query)
+
+    return jsonify(bill_search)

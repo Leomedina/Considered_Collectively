@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class="row pt-5">
-    <div class="col justify-content-center">
+    <div class="col">
         <p class="display-4"><strong>Legislation at your fingertips.</strong></p>
     </div>
 </div>
@@ -14,20 +14,14 @@
         <p class="lead">Follow your elected officials and their sponsored legislation in Congress.</p>
     </div>
 </div>
-<div class="row pt-5">
+<div class="row pt-5 pb-3">
     {% include 'illustrations/debate.html' %}
-    <div class="col-md-4">
-        <p class="display-5"><strong>Stay Informed</strong></p>
-    </div>
-    <div class="row p-5 justify-content-center">
-        <div class="col-md-5 " >
-            <p class="lead"><small>The Oxford Dictionary defines legislation
-             as </br><strong>"Laws, considered collectively."</strong> 
-                Our goal is to collectively consider the laws that affect our nation.</small></p>
-        </div>
-        <div class="lead">---</div>
+    {% include 'modules/latest_bills.html' %}
+</div>
+<div class="row m-3 p-3 align-content-center">
+    <div class="col-md">
+        <a href="/register" class="btn btn-primary btn-lg px-5 mx-3">Sign-Up</a>
+        <a href="/login" class="btn btn-light btn-lg px-5 mx-3">Log-in</a>
     </div>
 </div>
-
-
 {% endblock %}

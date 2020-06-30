@@ -1,0 +1,16 @@
+<div class="col-md-5 shadow-sm pt-2 rounded">
+  <h2 class="h2">
+    <u>
+      Latest Bills:
+    </u>
+    <div class="list-group list-group-flush pt-2">
+      {% for bill in bills %}
+        <a href="{{bill.congressdotgov_url}}/text" 
+        target="_blank"
+        class="list-group-item px-3 my-2 text-truncate lead">
+          {{bill.short_title}}
+        </a>
+      {% endfor %}
+    </div>
+  </h2>
+</div>
