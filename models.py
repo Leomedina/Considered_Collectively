@@ -146,7 +146,7 @@ class Bill(db.Model):
         db.ForeignKey('representatives.id')
     )
 
-    introduce_date = db.Column(
+    introduced_date = db.Column(
         db.Text,
     )
 
@@ -176,6 +176,18 @@ class Bill(db.Model):
 
     latest_major_action_date = db.Column(
         db.Text,
+    )
+
+    sponsor_name = db.Column(
+        db.Text,
+    )
+
+    sponsor_state = db.Column(
+        db.Text,
+    )
+
+    sponsor_party = db.Column(
+        db.Text
     )
 
     def __repr__(self):

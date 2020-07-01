@@ -43,6 +43,41 @@ def do_logout():
     if CURR_USER_KEY in session:
         del session[CURR_USER_KEY]
 
+def add_bill(bill_id):
+    """Save bill to database"""
+    bill = APIUtils.get_bill_by_id(bill_id)
+   
+    new_bill = Bill(
+        id = bill.get("bill_id"),
+        sponsor_id = bill.get("sponsor_id"),
+        sponsor_name = bill.get("sponsor_name"),
+        sponsor_state = bill.get("sponsor_state"),
+        sponsor_party = bill.get("sponsor_party"),
+        introduced_date = bill.get("introduced_date"),
+        title = bill.get("title"),
+        short_title = bill.get("short_title"),
+        govtrack_url = bill.get("govtrack_url"),
+        committees = bill.get("committees"),
+        primary_subject = bill.get("primary_subject"),
+        lastest_major_action = bill.get("latest_major_action"),
+        lastest_major_action_date = bill.get("latest_major_action_date"),
+    )
+
+    db.session.add(new_bill)
+    db.session.commit()
+
+def link_bill_to_user(bill_id):
+    """Link bill to user"""
+
+    newLink = User_Bill(
+        user_id = g.user.id,
+        bill_id = bill_id
+    )
+
+    db.session.add(newLink)
+    db.session.commit()
+
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
 
@@ -148,16 +183,11 @@ def user():
 
 ####################################################################################
 
-@app.route("/bills")
-def recent_bills():
-    bill_data = APIUtils.get_recent_bills();
-
-    return jsonify(bill_data)
-
-@app.route("/bills_search")
-def search_bills():
+@app.route("/bills_search/<bill_id>")
+def search_bills(bill_id):
     query = "health care"
-    bill_search = APIUtils.search_bills(query)
+    # bill_search = APIUtils.search_bills(query)
+    bill_search = APIUtils.get_bill_by_id(bill_id)
 
     return jsonify(bill_search)
 
@@ -175,3 +205,11 @@ def search_page():
         return render_template('user/explore.html', form = form, bills = bills)
 
     return render_template('user/explore.html', form = form)
+
+@app.route("/bill/<bill_id>", methods=["POST"])
+def add_bill_to_user(bill_id):
+    
+    add_bill(bill_id)
+    link_bill_to_user(bill_id)
+
+    return redirect('/')

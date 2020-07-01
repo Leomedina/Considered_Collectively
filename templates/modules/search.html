@@ -13,18 +13,26 @@
     {% for bill in bills if bills != 'None'%}
     <div class="card col-lg-10 m-2 pt-4 px-3">
       <dl class="row p-2">
-        <dt class="col-sm-3">{{bill.sponsor_title}} {{bill.sponsor_name}} ({{bill.sponsor_state}})</dt>
+        <dt class="col-sm-3">{{bill.sponsor_title}} {{bill.sponsor_name}}
+          <small class="font-weight-normal text-muted">
+            ({{bill.sponsor_state}}-{{bill.sponsor_party}})
+          </small></dt>
         <dd class="col-sm-9 text-truncate font-weight-bold">[ {{bill.bill_id}} ] {{bill.short_title}}</dd>
       <dt class="col-sm-3 font-weight-light text-muted">
         <small>
           {{bill.latest_major_action}}<br>
           ( {{bill.latest_major_action_date[5:]+"-"+bill.latest_major_action_date[2:4]}} )
           <br>
-          <form action="/bill" method="POST"><button class="btn btn-outline-success m-3 btn-sm">Follow The Bill</button></form>
+          <form action="/bill/{{bill.bill_id}}" method="POST"><button class="btn btn-outline-success m-3 btn-sm">Follow The Bill</button></form>
         </small>
       </dt>
       <dd class="col-sm-9">
-        <p>{{bill.title}}</p>
+        <p>
+          {{bill.title}}
+        </p>
+        <p>
+          Introduced on {{bill.introduced_date[5:]}}-{{bill.latest_major_action_date[2:4]}}
+        </p>
         <a href="{{bill.congressdotgov_url}}/text" class="btn btn-light btn-sm" target="_blank"">Read the Bill</a>
       </dd>
     </div>
