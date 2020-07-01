@@ -1,5 +1,31 @@
-<div class="col-md shadow-sm p-3 m-4 bg-white">
-  <h3 class="h3">
-      Search
-  </h3>
+<div class="col-md shadow-sm p-4 m-4 bg-white">
+  <div class="row">
+    <h3 class="h3">
+      Search by issue
+    </h3>
+  </div>
+  <div class="row justify-content-center">
+    <form class="col-lg-5 p-3 d-flex" method="POST">
+      {% for field in form %} {{ field(placeholder=field.label.text, class="form-control
+      mr-2") if field.name }} {% endfor %}
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+    {% for bill in bills if bills != 'None'%}
+    <div class="card col-lg-10 m-2 p-2">
+      <div class="card-body">
+        <p class="card-title text-truncate px-3">
+          <strong>
+            [ {{bill.bill_id}} ]: {{bill.short_title}}
+          </strong>
+        </p>
+        <p class="card-text text-truncate px-5">
+         {{bill.title}}
+        </p>
+        <form action="/bill" method="POST">
+          <button class="btn btn-outline-dark">Follow</button>
+        </form>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
 </div>

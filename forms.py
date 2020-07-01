@@ -23,3 +23,7 @@ class EditProfileForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[Length(min=6)])
     # profile_url = StringField('Profile Picture')
+
+class BillSearchForm(FlaskForm):
+    """Search Form"""
+    search = StringField("health care, budget, veteran affairs, etc", validators=[Length(max=100)])

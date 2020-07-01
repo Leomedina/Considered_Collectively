@@ -97,20 +97,27 @@ def logout():
 
 ####################################################################################
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def show_home():
     """Return home if user is logged in.
         If user is not logged in, redirect to anonymous home"""
+
     if g.user:
-        return render_template('home.html')
+        form = BillSearchForm()
+
+        bills = 'None'
+        if form.validate_on_submit():    
+            query = form.search.data
+            bills = APIUtils.search_bills(query).values()
+        return render_template('home.html', form = form, bills = bills)
+
 
     bill_data = [(APIUtils.get_recent_bills().get(0)),
                     (APIUtils.get_recent_bills().get(1)),
                     (APIUtils.get_recent_bills().get(2)),
                     (APIUtils.get_recent_bills().get(3)),
                     (APIUtils.get_recent_bills().get(4)),
-    ]
-
+    ]   
     return render_template("home-anon.html", bills = bill_data)
 
 
@@ -126,12 +133,15 @@ def user():
         if not User.authenticate(g.user.email, form.password.data):
             flash("Wrong Password", "danger")
             return redirect("/")
+
         user = User.query.get_or_404(g.user.id)
         user.email = form.email.data
         user.name = form.name.data
         # user.profile_url = form.profile_url.data
+
         db.session.add(user)
         db.session.commit()
+        
         flash("Profile Updated!", "success")
         return redirect('/')
     return render_template("/user/edit_user.html", form = form )
@@ -150,3 +160,18 @@ def search_bills():
     bill_search = APIUtils.search_bills(query)
 
     return jsonify(bill_search)
+
+@app.route("/search", methods=["GET", "POST"])
+def search_page():
+    if not g.user:
+        flash("Must be logged in to view page", "warning")
+        return redirect("/")
+
+    form = BillSearchForm()
+    bills = 'None'
+    if form.validate_on_submit():    
+        query = form.search.data
+        bills = APIUtils.search_bills(query).values()
+        return render_template('user/explore.html', form = form, bills = bills)
+
+    return render_template('user/explore.html', form = form)

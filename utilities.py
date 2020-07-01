@@ -11,18 +11,20 @@ class APIUtils():
                     headers={"X-API-Key": API_KEY})
 
         res_json = response.json()
-
         cleaned = BillsUtils.getCleanedResults(res_json.get('results')[0]['bills'])
 
         return cleaned
 
     def search_bills(query):
-        """Get recent 20 bills that match query"""
+        """Get 20 recent bills that match query"""
 
         response = requests.get(f"https://api.propublica.org/congress/v1/bills/search.json?query={query}", 
                     headers={"X-API-Key": API_KEY})
         
-        return response.json()
+        res_json = response.json()
+        cleaned = BillsUtils.getCleanedResults(res_json.get('results')[0]['bills'])
+
+        return cleaned
 
 class BillsUtils():
     """Utilities for Bills"""
