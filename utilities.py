@@ -1,5 +1,6 @@
 import requests, json
-from keys import API_KEY
+# from keys import API_KEY
+import os
 
 class APIUtils():
     """Utilities Class"""
@@ -8,7 +9,7 @@ class APIUtils():
         """Get the latest 20 bills"""
 
         response = requests.get("https://api.propublica.org/congress/v1/116/both/bills/active.json", 
-                    headers={"X-API-Key": API_KEY})
+                    headers={"X-API-Key": os.environ.get('API_KEY')})
 
         res_json = response.json()
         cleaned = BillsUtils.getCleanedResults(res_json.get('results')[0]['bills'])
@@ -19,7 +20,7 @@ class APIUtils():
         """Get 20 recent bills that match query"""
 
         response = requests.get(f"https://api.propublica.org/congress/v1/bills/search.json?query={query}", 
-                    headers={"X-API-Key": API_KEY})
+                    headers={"X-API-Key": os.environ.get('API_KEY')})
         
         res_json = response.json()
         cleaned = BillsUtils.getCleanedResults(res_json.get('results')[0]['bills'])
@@ -30,7 +31,7 @@ class APIUtils():
         """Get bill by Id"""
         
         response = requests.get(f"https://api.propublica.org/congress/v1/116/bills/{bill_id[:-4]}.json", 
-                    headers={"X-API-Key": API_KEY})
+                    headers={"X-API-Key": os.environ.get('API_KEY')})
     
         res_json = response.json().get('results')[0]
         return res_json
