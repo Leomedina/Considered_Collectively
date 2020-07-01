@@ -6,25 +6,27 @@
   </div>
   <div class="row justify-content-center">
     <form class="col-lg-5 p-3 d-flex" method="POST">
-      {% for field in form %} {{ field(placeholder=field.label.text, class="form-control
-      mr-2") if field.name }} {% endfor %}
+      {% for field in form %} {{ field(placeholder=field.label.text,
+      class="form-control mr-2") if field.name }} {% endfor %}
       <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
     {% for bill in bills if bills != 'None'%}
-    <div class="card col-lg-10 m-2 p-2">
-      <div class="card-body">
-        <p class="card-title text-truncate px-3">
-          <strong>
-            [ {{bill.bill_id}} ]: {{bill.short_title}}
-          </strong>
-        </p>
-        <p class="card-text text-truncate px-5">
-         {{bill.title}}
-        </p>
-        <form action="/bill" method="POST">
-          <button class="btn btn-outline-dark">Follow</button>
-        </form>
-      </div>
+    <div class="card col-lg-10 m-2 pt-4 px-3">
+      <dl class="row p-2">
+        <dt class="col-sm-3">{{bill.sponsor_title}} {{bill.sponsor_name}} ({{bill.sponsor_state}})</dt>
+        <dd class="col-sm-9 text-truncate font-weight-bold">[ {{bill.bill_id}} ] {{bill.short_title}}</dd>
+      <dt class="col-sm-3 font-weight-light text-muted">
+        <small>
+          {{bill.latest_major_action}}<br>
+          ( {{bill.latest_major_action_date[5:]+"-"+bill.latest_major_action_date[2:4]}} )
+          <br>
+          <form action="/bill" method="POST"><button class="btn btn-outline-success m-3 btn-sm">Follow The Bill</button></form>
+        </small>
+      </dt>
+      <dd class="col-sm-9">
+        <p>{{bill.title}}</p>
+        <a href="{{bill.congressdotgov_url}}/text" class="btn btn-light btn-sm" target="_blank"">Read the Bill</a>
+      </dd>
     </div>
     {% endfor %}
   </div>
