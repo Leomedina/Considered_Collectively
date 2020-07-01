@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, flash, redirect, session, g, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
+import os
 
 from models import *
 from forms import *
@@ -9,7 +10,7 @@ from utilities import *
 CURR_USER_KEY = "curr_user"
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "secret"
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'TisASecret')
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///follow-rep'
