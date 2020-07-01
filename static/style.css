@@ -25,3 +25,21 @@ strong {
 a:hover {
   color: #ffc680;
 }
+
+nav {
+  background-color:#fbfbfb;
+}
+
+.btn-outline-primary{
+  color: #ffc680;
+  border-color: #ffc680;
+}
+
+.btn-outline-primary:hover{
+  background-color: #ffc680;
+  border-color: #ffc680;
+}
+
+footer {
+  background-color:#fbfbfb;
+}

@@ -194,12 +194,9 @@ def search_bills(bill_id):
 
 @app.route("/search", methods=["GET", "POST"])
 def search_page():
-    if not g.user:
-        flash("Must be logged in to view page", "warning")
-        return redirect("/")
-
     form = BillSearchForm()
     bills = 'None'
+
     if form.validate_on_submit():    
         query = form.search.data
         bills = APIUtils.search_bills(query).values()
@@ -209,7 +206,10 @@ def search_page():
 
 @app.route("/bill/<bill_id>", methods=["POST"])
 def add_bill_to_user(bill_id):
-    
+    if not g.user:
+        flash("Sign up to save bills!", "warning")
+        return redirect("/register")
+
     add_bill(bill_id)
     link_bill_to_user(bill_id)
 
