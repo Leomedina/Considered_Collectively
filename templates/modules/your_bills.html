@@ -1,47 +1,27 @@
 <div class="col-md shadow-sm p-4 m-4 bg-white">
   <div class="row">
-    <h5 class="h5">
-      <strong>
+    <h3 class="h3">
         Your Bills
-      </strong>
-    </h5>
+    </h3>
   </div>
   <div class="row justify-content-center">
-    <div class="card col-lg-10 m-2">
-      <div class="card-body">
-          <p class="card-title text-truncate">Bill Title</p>
-        <p class="card-text">
-          <small>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </small>
+    {% for bill in your_bills %}
+    <div class="card col-lg-9 p-3 my-3 mx-1">
+    <dl class="row p-2 justify-content-center">
+        <dd class="col-sm-9 text-truncate font-weight-bold">{{bill.short_title}}</dd>
+      <dd class="col-sm-9">
+        <p>
+          {{bill.title}} | Introduced on {{bill.introduced_date[5:]}}-{{bill.introduced_date[2:4]}}
         </p>
-        <a href="#" class="btn btn-primary">Read the Bill</a>
-      </div>
-    </div>
-    <div class="card col-lg-10 m-2">
-      <div class="card-body">
-          <p class="card-title text-truncate">Bill Title</p>
-        <p class="card-text">
-          <small>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </small>
+        <p>
+          <strong>
+            Latest action on {{bill.latest_major_action_date[5:]}}-{{bill.introduced_date[2:4]}}:
+          </strong>
+          {{bill.latest_major_action}}
         </p>
-        <a href="#" class="btn btn-primary">Read The Bill</a>
-      </div>
+        <a href="{{bill.govtrack_url}}/text" class="btn btn-light btn-sm" target="_blank"">Read the Bill</a>
+      </dd>
     </div>
-    <div class="card col-lg-10 m-2">
-      <div class="card-body">
-          <p class="card-title text-truncate">Bill Title</p>
-        <p class="card-text">
-          <small>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </small>
-        </p>
-        <a href="#" class="btn btn-primary">Read The Bill</a>
-      </div>
-    </div>
+    {% endfor %}
   </div>
 </div>

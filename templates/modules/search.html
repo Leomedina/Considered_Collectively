@@ -11,8 +11,8 @@
       <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
     {% for bill in bills if bills != 'None'%}
-    <div class="card col-lg-10 m-2 pt-4 px-3">
-      <dl class="row p-2">
+    <div class="card col-lg-12 p-3 my-3 mx-1">
+    <dl class="row p-2">
         <dt class="col-sm-3">{{bill.sponsor_title}} {{bill.sponsor_name}}
           <small class="font-weight-normal text-muted">
             ({{bill.sponsor_state}}-{{bill.sponsor_party}})

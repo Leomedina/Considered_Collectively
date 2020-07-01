@@ -143,7 +143,6 @@ class Bill(db.Model):
 
     sponsor_id = db.Column(
         db.Text,
-        db.ForeignKey('representatives.id')
     )
 
     introduced_date = db.Column(

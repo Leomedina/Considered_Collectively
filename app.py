@@ -59,8 +59,8 @@ def add_bill(bill_id):
         govtrack_url = bill.get("govtrack_url"),
         committees = bill.get("committees"),
         primary_subject = bill.get("primary_subject"),
-        lastest_major_action = bill.get("latest_major_action"),
-        lastest_major_action_date = bill.get("latest_major_action_date"),
+        latest_major_action = bill.get("latest_major_action"),
+        latest_major_action_date = bill.get("latest_major_action_date"),
     )
 
     db.session.add(new_bill)
@@ -139,12 +139,12 @@ def show_home():
 
     if g.user:
         form = BillSearchForm()
-
+        your_bills = g.user.bills_following
         bills = 'None'
         if form.validate_on_submit():    
             query = form.search.data
             bills = APIUtils.search_bills(query).values()
-        return render_template('home.html', form = form, bills = bills)
+        return render_template('home.html', form = form, bills = bills, your_bills = your_bills)
 
 
     bill_data = [(APIUtils.get_recent_bills().get(0)),
