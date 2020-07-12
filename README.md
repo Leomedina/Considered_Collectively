@@ -1,4 +1,4 @@
-#  Considered Collectively
+#  Considered Collectively (DOCUMENTATION IS WIP)
 *Short description of your project, in one or two sentences.* 
 
 ## Technologies in Used:
