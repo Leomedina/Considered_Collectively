@@ -20,12 +20,6 @@
 * **DATA USED:**
   * [ProPublica's Congress API.](https://www.propublica.org/datastore/api/propublica-congress-api)
 
-## Screenshots:
-
-![User landing page](https://i.imgur.com/FJTdpc7.jpg)
-
-![User Search page](https://i.imgur.com/ySnn9ty.jpg)
-
 ## Testing
 All Functions will be broken down and unit tested wherever possible. This section is still a WIP, more to come soon.
 
@@ -40,3 +34,9 @@ Help me fix the problem as quickly as possible by following [Mozilla's guideline
 * **UI / UX:** Leo Medina
 * **Front-End Developer:** Leo Medina
 * **Back-End Engineer:** Leo Medina
+
+## Screenshots:
+
+![User landing page](https://i.imgur.com/FJTdpc7.jpg)
+
+![User Search page](https://i.imgur.com/ySnn9ty.jpg)
