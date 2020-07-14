@@ -1,31 +1,33 @@
 #  Considered Collectively
-*Short description of your project, in one or two sentences.* 
+
+### Considered Collectively is a web app that allows you to track and follow bills in the United States Congress.The application is built using Python, Flask, Bootstrap 5, and deployed on Heroku using a PostgreSQL database.
 
 ## Technologies in Used:
 * **Front-End:**
-  * **In Use:** HTML, CSS, JS, and Bootstrap 5 (Alpha).
+  * **In Use:** HTML, CSS, and Bootstrap 5 (alpha) using templates built with Jinja.
   * **Not in used:** JQuery (because it's 2020).
 
 * **Back-End:**
   * **In Use:** Python, Flask, PostgreSQL, and Bcrypt.
   
 ##  Database Information:
-### Many-To-Many Schema
- ![](https://i.imgur.com/I89P5Rn.jpg)
 
-### APIs:
-* **External:**
-  * [ProPublica's Congress API](https://www.propublica.org/datastore/api/propublica-congress-api)
+* **DATABASE:**
+  * Data is stored in a many-to-many PostgreSQL database on Heroku.
+  * User password data is encrypted using Bcrypt.
+  * Bills are only saved when a user clicks on "Follow The Bill". This saves space on the server.
+  * Bills are updated every morning when an external cron job makes a  request to a secret route, allowing for the user to see the latest bills whenever they login (This feature is still a WIP).
+* **DATA USED:**
+  * [ProPublica's Congress API.](https://www.propublica.org/datastore/api/propublica-congress-api)
 
-## Demo
+## Screenshots:
 
-Section to come
+![User landing page](https://i.imgur.com/FJTdpc7.jpg)
 
+![User Search page](https://i.imgur.com/ySnn9ty.jpg)
 
 ## Testing
-All Functions where broken down and unit tested wherever possible. More information to come.
-* **Front-End:** JasmineJS
-* **Back-End:** Python unittest 
+All Functions will be broken down and unit tested wherever possible. This section is still a WIP, more to come soon.
 
 ## Errors and bugs
 
