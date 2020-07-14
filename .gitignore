@@ -1,5 +1,6 @@
 /venv
 /__pycache__
-/node_modules
 app.pyc
 keys.py
+/utilities/__pycache__
+/views/__pycache__

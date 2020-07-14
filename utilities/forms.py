@@ -22,7 +22,6 @@ class EditProfileForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired(), Length(max=100)])
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[Length(min=6)])
-    # profile_url = StringField('Profile Picture')
 
 class BillSearchForm(FlaskForm):
     """Search Form"""

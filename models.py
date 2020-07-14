@@ -13,7 +13,7 @@ def connect_db(app):
 
 
 class User(db.Model):
-    """TBD"""
+    """USER MODEL"""
 
     __tablename__ = "users"
 
@@ -77,7 +77,7 @@ class User(db.Model):
 
     @classmethod
     def authenticate(cls, email, password):
-        """WRITE THIS"""
+        """Authenticates user"""
 
         user = User.query.filter_by(email = email).first()
         if user and bcrypt.check_password_hash(user.password, password):
