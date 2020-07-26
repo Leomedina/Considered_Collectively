@@ -16,7 +16,7 @@
   * Data is stored in a many-to-many PostgreSQL database on Heroku.
   * User password data is encrypted using Bcrypt.
   * Bills are only saved when a user clicks on "Follow The Bill". This saves space on the server.
-  * Bills are updated every morning when an external cron job makes a  request to a secret route, allowing for the user to see the latest bills whenever they login (This feature is still a WIP).
+  * Bills are updated every morning when an external cron job makes a  request to a secret route, allowing for the user to see the latest bills whenever they login.
 * **DATA USED:**
   * [ProPublica's Congress API.](https://www.propublica.org/datastore/api/propublica-congress-api)
 

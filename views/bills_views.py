@@ -13,7 +13,6 @@ bills_BP = Blueprint ('bills_blueprint', __name__, template_folder="templates", 
 
 @bills_BP.route("/bills_search/<bill_id>")
 def search_bills(bill_id):
-    query = "health care"
     bill_search = APIUtils.get_bill_by_id(bill_id)
 
     return jsonify(bill_search)
@@ -40,3 +39,9 @@ def add_bill_to_user(bill_id):
     link_bill_to_user(bill_id)
 
     return redirect('/')
+
+@bills_BP.route("/bills/update", methods=["GET"])
+def updateAllBills():
+    result = {"status": "success, all bills updated"}
+    Bill.update_all_bills()
+    return jsonify(result)

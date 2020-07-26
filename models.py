@@ -2,6 +2,8 @@
 
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
+from utilities.api_utils import *
+from sqlalchemy import update
 
 bcrypt = Bcrypt()
 db = SQLAlchemy()
@@ -64,7 +66,7 @@ class User(db.Model):
     
     @classmethod
     def register(cls, email, password, name):
-        """WRITE THIS"""
+        """Register user and hash's the password"""
 
         hashed = bcrypt.generate_password_hash(password)
         hashed_utf8 = hashed.decode("utf8")
@@ -189,8 +191,22 @@ class Bill(db.Model):
         db.Text
     )
 
+    @classmethod
+    def update_all_bills(self):
+        bills = Bill.query.all()
+        for bill in bills:
+            response = APIUtils.get_bill_by_id(bill.id)
+            Bill.query.filter_by(id = bill.id).update({
+                Bill.latest_major_action: response.get('latest_major_action'),
+                Bill.latest_major_action_date: response.get('latest_major_action_date')
+            }, synchronize_session = False)
+
+            db.session.commit()
+
+        return {'status':'success'}
+
     def __repr__(self):
-        first = f"<Bill_id: {self.id}; Sponsor_id: {self.sponsor_id}; Introduce_date: {self.introduce_date}>"
+        first = f"<Bill_id: {self.id}; Sponsor_id: {self.sponsor_id}>"
         return f"{first}"
 
 class User_Rep(db.Model):
